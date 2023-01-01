@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlubSDK Browser Demo</title>
+    <script type="application/javascript" src="http://localhost:9898/index.js"></script>
+</head>
+<body>
+Open your console to see the results from RadarSDK!
+</body> 
+<script>
+    window.addEventListener('DOMContentLoaded', async (event) => {
+        const adminTokenResponse = await FlubSDK.HttpServices.getAsync('/get-admin-token')
+        const { adminToken } = await adminTokenResponse.json()
+
+        // RadarSDK is loaded
+        console.log('FlubSDK has been loaded from server.')
+        console.log(FlubSDK)
+
+        // Start a new client
+        const FlubClient = new FlubSDK.Client({
+            baseUrl: 'http://127.0.0.1:8787',
+            accessToken: adminToken
+        })
+        console.log('FlubClient initialized with admin accessToken.')
+        console.log(FlubClient)
+
+        // Add a new user to Flub API
+        const addResponse = await FlubClient.AuthUser.add({
+            roles: ["user"],
+            username: "testuser1",
+            email: "testuser1@flub.pub",
+            password: "password123"
+        })
+        console.log('addResponse', addResponse)
+
+        // Admin override to activate account
+        const updateResponse = await FlubClient.AuthUser.update({
+            email: 'testuser1@flub.pub',
+            updates: {
+                meta: {
+                    isActivated: true
+                }
+            }
+        })
+        console.log('updateResponse', updateResponse)
+
+        // Login with user
+        const loginResponse = await FlubClient.AuthUser.login({
+            email: 'testuser1@flub.pub',
+            password: 'password123'
+        })
+        console.log('loginResponse', loginResponse)
+
+        // Retrieve user
+        const getResponse = await FlubClient.AuthUser.get({
+            email: 'testuser1@flub.pub'
+        })
+        console.log('getResponse', getResponse)
+
+        // Inspect FlubClient object again
+        console.log('FlubClient', FlubClient)
+    })
+</script>
+</html>
