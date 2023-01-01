@@ -1,0 +1,71 @@
+{
+  "name": "@flubpub/flub-sdk",
+  "version": "0.0.1",
+  "description": "The client side SDK for utilizing the Flub API.",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
+  "keywords": [
+    "flub",
+    "sdk",
+    "api",
+    "client",
+    "javascript",
+    "typescript",
+    "cloudflare"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "start": "nodemon --exec npm run build",
+    "release": "npm publish --access public",
+    "prerelease": "mv 'README.md' 'README.git.md' && cp 'README.npm.md' 'README.md'",
+    "postrelease": "rm 'README.md' && mv 'README.git.md' 'README.md'",
+    "release:git": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags && gh release create v$PACKAGE_VERSION --notes \"npm package release\"",
+    "test:node": "node test/node/node.mjs",
+    "test:web": "node test/web/web.mjs",
+ },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flub-pub/flub-sdk.git"
+  },
+  "author": "Wil Neeley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flub-pub/flub-sdk/issues"
+  },
+  "homepage": "https://github.com/flub-pub/flub-sdk#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-inject": "^5.0.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-replace": "^5.0.0",
+    "@rollup/plugin-terser": "^0.1.0",
+    "@rollup/plugin-typescript": "^8.5.0",
+    "@types/express": "^4.17.14",
+    "@types/jest": "^29.2.1",
+    "@types/node": "^18.11.8",
+    "@types/speakeasy": "^2.0.7",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jest": "^29.2.2",
+    "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
+    "open": "^8.4.0",
+    "path": "^0.12.7",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "speakeasy": "^2.0.0",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "cross-fetch": "^3.1.5"
+  }
+}
