@@ -1,0 +1,7 @@
+.github
+node_modules
+test
+jest.config.js
+.env
+README.git.md
+README.npm.md
