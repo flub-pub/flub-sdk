@@ -1,0 +1,6 @@
+{
+  "watch": ["src", "rollup.config.web.js", "rollup.config.node.js"],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "ts-node ./lib/index.ts"
+}
