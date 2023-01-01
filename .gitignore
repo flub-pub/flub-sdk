@@ -1,0 +1,15 @@
+# Environments
+.env
+*.env
+
+# Logs
+logs
+
+# Development
+node_modules
+README.git.md
+
+# Misc
+.idea
+*.iml
+.DS_Store
