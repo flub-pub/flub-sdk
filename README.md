@@ -20,7 +20,7 @@ npm install @flubpub/flub-sdk
 In node you can use the package like so:
 
 ```typescript
-import RadarSDK from '@bflubpub/flub-sdk'
+import FlubSDK from '@bflubpub/flub-sdk'
 
 const FlubClient = new FlubSDK.Client({
     baseUrl: 'http://127.0.0.1:8787'
