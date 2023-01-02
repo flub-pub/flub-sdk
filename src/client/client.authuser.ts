@@ -155,7 +155,7 @@ export class AuthUser {
 
     async refresh(headers: any = null): Promise<Http.ResponsesI> {
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/refresh`
-        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
+        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
@@ -171,7 +171,7 @@ export class AuthUser {
 
     async verify(headers: any = null): Promise<Http.ResponsesI> {
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/verify`
-        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
+        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
