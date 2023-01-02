@@ -52,8 +52,8 @@ export class AuthUser {
     }
 
     async add(options: any, headers: any = null): Promise<Http.ResponsesI> {
-        const { username, email, password, roles = ['user'] } = options
-        const bodyObj = { username, email, password, roles }
+        const { username, email, password } = options
+        const bodyObj = { username, email, password }
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
