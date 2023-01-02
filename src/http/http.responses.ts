@@ -1,4 +1,4 @@
-export interface IHttpResponse {
+export interface ResponsesI {
     data: any
     status: number|null
     statusType: string,
@@ -9,9 +9,9 @@ export interface IHttpResponse {
     errors: any
 }
 
-export class HttpResponses {
+export class Responses {
 
-    async resolveResponse(responsePromise: Response): Promise<IHttpResponse> {
+    async resolveResponse(responsePromise: Response): Promise<ResponsesI> {
         try {
             const response = await responsePromise
             const {

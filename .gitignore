@@ -2,6 +2,12 @@
 .env
 *.env
 
+# Dist files
+dist
+dist/*
+build
+build/*
+
 # Logs
 logs
 

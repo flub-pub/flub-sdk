@@ -1,7 +1,6 @@
-import { Config, IConfig } from '../config'
-import { HttpServices, HttpResponses } from '../http'
-import { UtilMisc } from '../util'
-import { UtilUrls } from '../util'
+import { Config } from '../config'
+import { Http } from '../http'
+import { Util } from '../util'
 import { AuthUser } from './client.authuser'
 import { OrgUser } from './client.orguser'
 import { ApiKey } from './client.apikey'
@@ -22,20 +21,20 @@ export class Client {
     public ApiKey: any
     public ScopeApp: any
 
-    constructor(config: IConfig) {
+    constructor(config: Config.InitI) {
 
         // Initialize configuration
-        this.Config = new Config(config)
+        this.Config = new Config.Init(config)
 
         // Initialize internal classes
-        this.HttpServices = new HttpServices()
-        this.HttpResponses = new HttpResponses()
-        this.UtilMisc = new UtilMisc()
-        this.UtilUrls = new UtilUrls()
+        this.HttpServices = new Http.Services()
+        this.HttpResponses = new Http.Responses()
+        this.UtilMisc = new Util.Misc()
+        this.UtilUrls = new Util.Urls()
 
         // Instantiate chained classes
         this.AuthUser = new AuthUser(this, '/auth/user')
-        this.OrgUser = new ApiKey(this, '/org/user')
+        this.OrgUser = new OrgUser(this, '/org/user')
         this.ApiKey = new ApiKey(this, '/api/key')
         this.ScopeApp = new ScopeApp(this, '/scope/app')
 

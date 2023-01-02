@@ -1,2 +1,1 @@
-export * from './http.services'
-export * from './http.responses'
+export * from './http.class'

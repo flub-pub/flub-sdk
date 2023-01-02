@@ -1,36 +1,7 @@
-export interface IConfig {
-    baseUrl: string,
-    clientId?: string,
-    clientSecret?: string,
-    accessToken?: string,
-    refreshToken?: string,
-    storageName?: string,
-}
+import { InitI as ConfigInitI } from './config.init'
+import { Init as ConfigInit } from './config.init'
 
-export class Config {
-    baseUrl: string
-    clientId: string
-    clientSecret: string
-    accessToken: string
-    refreshToken: string
-    storageName: string
-
-    constructor(options: any) {
-        const {
-            baseUrl = '',
-            clientId = '',
-            clientSecret = '',
-            accessToken = '',
-            refreshToken = '',
-            storageName = ''
-        } = options
-
-        // Initialize configuration
-        this.baseUrl = baseUrl
-        this.clientId = clientId
-        this.clientSecret = clientSecret
-        this.accessToken = accessToken
-        this.refreshToken = refreshToken
-        this.storageName = storageName
-    }
+export namespace Config {
+    export interface InitI extends ConfigInitI {}
+    export const Init = ConfigInit
 }

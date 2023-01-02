@@ -6,14 +6,14 @@
     <script type="application/javascript" src="http://localhost:9898/index.js"></script>
 </head>
 <body>
-Open your console to see the results from RadarSDK!
+Open your console to see the results from FlubSDK!
 </body> 
 <script>
     window.addEventListener('DOMContentLoaded', async (event) => {
         const adminTokenResponse = await FlubSDK.HttpServices.getAsync('/get-admin-token')
         const { adminToken } = await adminTokenResponse.json()
 
-        // RadarSDK is loaded
+        // FlubSDK is loaded
         console.log('FlubSDK has been loaded from server.')
         console.log(FlubSDK)
 

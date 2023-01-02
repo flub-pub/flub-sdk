@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch'
 
-export class HttpServices {
+export class Services {
 
     async getAsync(url: string, options: any = {}): Promise<Response> {
         return await fetch(url, {

@@ -1,4 +1,4 @@
-export class UtilMisc {
+export class Misc {
 
     isBrowser(): boolean {
         const isBrowser = new Function("try {return this===window;}catch(e){ return false;}")

@@ -1,4 +1,4 @@
-export class UtilUrls {
+export class Urls {
 
     addQueryToUrl(url: string, options?: any[]): string {
         if (options) {

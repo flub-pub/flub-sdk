@@ -1,12 +1,12 @@
 import { Config } from './config'
 import { Client } from './client'
-import { HttpServices, HttpResponses } from './http'
+import { Http } from './http'
 
 const FlubSDK = {
     Config: Config,
     Client: Client,
-    HttpServices: new HttpServices(),
-    HttpResponses: new HttpResponses()
+    HttpServices: new Http.Services(),
+    HttpResponses: new Http.Responses()
 }
 
 export default FlubSDK

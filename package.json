@@ -27,7 +27,7 @@
     "postrelease": "rm 'README.md' && mv 'README.git.md' 'README.md'",
     "release:git": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags && gh release create v$PACKAGE_VERSION --notes \"npm package release\"",
     "test:node": "node test/node/node.mjs",
-    "test:web": "node test/web/web.mjs",
+    "test:web": "node test/web/web.mjs"
  },
   "repository": {
     "type": "git",

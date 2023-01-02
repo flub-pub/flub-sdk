@@ -1,4 +1,4 @@
-import { IHttpResponse } from '../http'
+import { Http } from '../http'
 
 export class AuthUser {
     private ctx: any
@@ -51,7 +51,7 @@ export class AuthUser {
         }
     }
 
-    async add(options: any, headers: any = null): Promise<IHttpResponse> {
+    async add(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { username, email, password, roles = ['user'] } = options
         const bodyObj = { username, email, password, roles }
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
@@ -64,7 +64,7 @@ export class AuthUser {
         }))
     }
 
-    async update(options: any, headers: any = null): Promise<IHttpResponse> {
+    async update(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '', updates = {} } = options
         const bodyObj = { email: email, username: username, id: id, updates: updates }
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
@@ -78,7 +78,7 @@ export class AuthUser {
         }))
     }
 
-    async getAll(headers: any = null): Promise<IHttpResponse> {
+    async getAll(headers: any = null): Promise<Http.ResponsesI> {
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/list`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
             headers: {
@@ -88,7 +88,7 @@ export class AuthUser {
         }))
     }
 
-    async get(options: any, headers: any = null): Promise<IHttpResponse> {
+    async get(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
         const queryUrl = this.ctx.UtilUrls.addQueryToUrl(baseUrl, [
@@ -105,7 +105,7 @@ export class AuthUser {
         }))
     }
 
-    async delete(options: any, headers: any = null): Promise<IHttpResponse> {
+    async delete(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.deleteAsync(queryUrl, {
@@ -118,7 +118,7 @@ export class AuthUser {
         }))
     }
 
-    async login(options: any, headers: any = null): Promise<IHttpResponse> {
+    async login(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '', password, otp = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/login`
         const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
@@ -135,7 +135,7 @@ export class AuthUser {
         return response
     }
 
-    async logout(options: any, headers: any = null): Promise<IHttpResponse> {
+    async logout(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/logout`
         const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
@@ -153,7 +153,7 @@ export class AuthUser {
         return response
     }
 
-    async refresh(headers: any = null): Promise<IHttpResponse> {
+    async refresh(headers: any = null): Promise<Http.ResponsesI> {
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/refresh`
         const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
             headers: {
@@ -169,7 +169,7 @@ export class AuthUser {
         return response
     }
 
-    async verify(headers: any = null): Promise<IHttpResponse> {
+    async verify(headers: any = null): Promise<Http.ResponsesI> {
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/verify`
         const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
             headers: {
@@ -185,7 +185,7 @@ export class AuthUser {
         return response
     }
 
-    async activate(options: any, headers: any = null): Promise<IHttpResponse> {
+    async activate(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { token, otp } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/activate`
         const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
@@ -198,7 +198,7 @@ export class AuthUser {
         return response
     }
 
-    async activateResend(options: any, headers: any = null): Promise<IHttpResponse> {
+    async activateResend(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/activate/resend`
         const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
@@ -211,7 +211,7 @@ export class AuthUser {
         return response
     }
 
-    async recover(options: any, headers: any = null): Promise<IHttpResponse> {
+    async recover(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '', redirectUrl = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/recover`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
@@ -223,7 +223,7 @@ export class AuthUser {
         }))
     }
 
-    async reset(options: any, headers: any = null): Promise<IHttpResponse> {
+    async reset(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { token, password, redirectUrl = '' } = options
         if (!password) {
             const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/reset`
@@ -250,7 +250,7 @@ export class AuthUser {
         }
     }
 
-    async toggle2fa(options: any, headers: any = null): Promise<IHttpResponse> {
+    async toggle2fa(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/2fa`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
@@ -263,7 +263,7 @@ export class AuthUser {
         }))
     }
 
-    async oauthGetProviders(options: any, headers: any = null): Promise<IHttpResponse> {
+    async oauthGetProviders(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { redirectUrl } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/oauth`
         const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
@@ -283,7 +283,7 @@ export class AuthUser {
         return response
     }
 
-    async oauthLogin(options: any, headers: any = null): Promise<IHttpResponse> {
+    async oauthLogin(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { token } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/oauth`
         const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.putAsync(queryUrl, {
@@ -294,64 +294,5 @@ export class AuthUser {
             body: JSON.stringify({ token })
         }))
         return response
-    }
-
-    async addScopes(options: any, headers: any = null): Promise<IHttpResponse> {
-        const { email = '', username = '', id = '', scope_ids = [] } = options
-        const bodyObj = { email, username, id, scope_ids }
-        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/scopes`
-        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.getAccessToken()}`,
-                ...(headers ? headers : {})
-            },
-            body: JSON.stringify(bodyObj)
-        }))
-    }
-
-    async getScopes(options: any, headers: any = null): Promise<IHttpResponse> {
-        const { email = '', username = '', id = '' } = options
-        const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
-        const queryUrl = this.ctx.UtilUrls.addQueryToUrl(baseUrl, [
-            `email=${email}`,
-            `username=${username}`,
-            `id=${id}`
-        ])
-        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.getAccessToken()}`,
-                ...(headers ? headers : {})
-            },
-        }))
-    }
-
-    async updateScopes(options: any, headers: any = null): Promise<IHttpResponse> {
-        const { email = '', username = '', id = '', scope_ids = [] } = options
-        const bodyObj = { email, username, id, scope_ids }
-        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/scopes`
-        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.putAsync(queryUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.getAccessToken()}`,
-                ...(headers ? headers : {})
-            },
-            body: JSON.stringify(bodyObj)
-        }))
-    }
-
-    async deleteScopes(options: any, headers: any = null): Promise<IHttpResponse> {
-        const { email = '', username = '', id = '', scope_ids = [] } = options
-        const bodyObj = { email, username, id, scope_ids }
-        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/scopes`
-        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.deleteAsync(queryUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.getAccessToken()}`,
-                ...(headers ? headers : {})
-            },
-            body: JSON.stringify(bodyObj)
-        }))
     }
 }
