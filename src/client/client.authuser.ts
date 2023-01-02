@@ -160,7 +160,8 @@ export class AuthUser {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
                 ...(headers ? headers : {})
-            }
+            },
+            body: JSON.stringify({})
         }))
         if (response.status === 200) {
             this.setAccessToken(response.data.accessToken)
@@ -176,7 +177,8 @@ export class AuthUser {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
                 ...(headers ? headers : {})
-            }
+            },
+            body: JSON.stringify({})
         }))
         if (response.status === 200) {
             this.setAccessToken(response.data.accessToken)
