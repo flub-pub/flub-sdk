@@ -35,8 +35,9 @@ Make sure you have `gh` installed globally. Ideally install it with your systems
 
 Then follow these steps to publish a new version of the package to npm and create a new release on GitHub.
 
-1. Build the package by running `npm run build`
-2. Increment the release version in `package.json` using SEMVER (major, minor, patch)
-3. Make sure you are logged into npm and have the correct permissions to publish the package.
-4. When you're ready to publish, run `npm run release` to publish the package to npm.
-5. Last, run `npm run release:git` to create and push a tag and then create a release.
+1. Login to the @flubpub NPM account with `npm login`
+2. Build the package by running `npm run build`
+3. Increment the release version in `package.json` using SEMVER (major, minor, patch)
+4. Make sure you are logged into npm and have the correct permissions to publish the package.
+5. When you're ready to publish, run `npm run release` to publish the package to npm.
+6. Last, run `npm run release:git` to create and push a tag and then create a release.
