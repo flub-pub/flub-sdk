@@ -1,10 +1,10 @@
+import { ClientBase } from './client.base'
 import { Http } from '../http'
 
-export class AuthUser {
-    private ctx: any
-    public base_prefix: string
+export class AuthUser extends ClientBase {
 
     constructor(context: any, base_prefix: string) {
+        super(context, base_prefix)
         this.ctx = context
         this.base_prefix = base_prefix
     }
