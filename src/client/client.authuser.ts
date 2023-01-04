@@ -9,48 +9,6 @@ export class AuthUser extends ClientBase {
         this.base_prefix = base_prefix
     }
 
-    getAccessToken(): string {
-        if (this.ctx.UtilMisc.isBrowser()) {
-            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName)
-            return this.ctx.accessToken || (storageObj ? storageObj.accessToken : '')
-        } else {
-            return this.ctx.accessToken
-        }
-    }
-
-    setAccessToken(token: string) {
-        this.ctx.accessToken = token
-        if (this.ctx.UtilMisc.isBrowser()) {
-            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName) || {}
-            this.ctx.UtilMisc.setLocalStore(this.ctx.storageName, { ...storageObj, accessToken: token })
-        }
-    }
-
-    getRefreshToken(): string {
-        if (this.ctx.UtilMisc.isBrowser()) {
-            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName)
-            return this.ctx.refreshToken || (storageObj ? storageObj.refreshToken : '')
-        } else {
-            return this.ctx.refreshToken
-        }
-    }
-
-    setRefreshToken(token: string) {
-        this.ctx.refreshToken = token
-        if (this.ctx.UtilMisc.isBrowser()) {
-            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName) || {}
-            this.ctx.UtilMisc.setLocalStore(this.ctx.storageName, { ...storageObj, refreshToken: token })
-        }
-    }
-
-    getOauthToken(provider: string): any {
-        if (provider in this.ctx.oauthTokens) {
-            return this.ctx.oauthTokens[provider]
-        } else {
-            return null
-        }
-    }
-
     async add(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { username, email, password } = options
         const bodyObj = { username, email, password }
@@ -188,7 +146,7 @@ export class AuthUser extends ClientBase {
     }
 
     async activate(options: any, headers: any = null): Promise<Http.ResponsesI> {
-        const { token, otp } = options
+        const { token = '', otp = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/activate`
         const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
