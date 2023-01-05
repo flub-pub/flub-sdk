@@ -111,7 +111,8 @@ export class AuthUser extends ClientBase {
         return response
     }
 
-    async refresh(headers: any = null): Promise<Http.ResponsesI> {
+    async refresh(options: any = {}, headers: any = null): Promise<Http.ResponsesI> {
+        const { token = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/refresh`
         const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
@@ -119,7 +120,7 @@ export class AuthUser extends ClientBase {
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
                 ...(headers ? headers : {})
             },
-            body: JSON.stringify({})
+            body: JSON.stringify({ ...(token ? { refreshToken: token } : {}) })
         }))
         if (response.status === 200) {
             this.setAccessToken(response.data.accessToken)
@@ -128,7 +129,8 @@ export class AuthUser extends ClientBase {
         return response
     }
 
-    async verify(headers: any = null): Promise<Http.ResponsesI> {
+    async verify(options: any = {}, headers: any = null): Promise<Http.ResponsesI> {
+        const { token = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/verify`
         const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
@@ -136,7 +138,7 @@ export class AuthUser extends ClientBase {
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
                 ...(headers ? headers : {})
             },
-            body: JSON.stringify({})
+            body: JSON.stringify({ ...(token ? { accessToken: token } : {}) })
         }))
         if (response.status === 200) {
             this.setAccessToken(response.data.accessToken)
