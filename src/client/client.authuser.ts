@@ -200,7 +200,7 @@ export class AuthUser extends ClientBase {
             }))
         } else {
             const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/reset`
-            return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
+            return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.putAsync(queryUrl, {
                 headers: {
                     'Content-Type': 'application/json',
                     ...(headers ? headers : {})
