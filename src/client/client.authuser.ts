@@ -253,6 +253,10 @@ export class AuthUser extends ClientBase {
             },
             body: JSON.stringify({ token })
         }))
+        if (response.status === 200) {
+            this.setAccessToken(response.data.accessToken)
+            this.setRefreshToken(response.data.refreshToken)
+        }
         return response
     }
 }
