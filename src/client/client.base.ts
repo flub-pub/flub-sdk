@@ -11,7 +11,7 @@ export class ClientBase {
     getAccessToken(): string {
         if (this.ctx.UtilMisc.isBrowser()) {
             const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName)
-            return this.ctx.accessToken || (storageObj ? storageObj.accessToken : '')
+            return storageObj ? storageObj.accessToken : this.ctx.accessToken
         } else {
             return this.ctx.accessToken
         }
@@ -28,7 +28,7 @@ export class ClientBase {
     getRefreshToken(): string {
         if (this.ctx.UtilMisc.isBrowser()) {
             const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName)
-            return this.ctx.refreshToken || (storageObj ? storageObj.refreshToken : '')
+            return storageObj ? storageObj.refreshToken : this.ctx.refreshToken
         } else {
             return this.ctx.refreshToken
         }
