@@ -23,7 +23,7 @@ server.get('/index.js.map', (req, res) => {
 })
 
 server.get('/get-admin-token', (req, res) => {
-    res.send({adminToken: process.env.ROOT_BEARER_TOKEN})
+    res.send({adminToken: '070cea17-cd77-4a18-ba51-c08f99a1c23e'})
 })
 
 server.listen(port, () => {
