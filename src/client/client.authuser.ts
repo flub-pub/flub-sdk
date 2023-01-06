@@ -114,7 +114,7 @@ export class AuthUser extends ClientBase {
     async refresh(options: any = {}, headers: any = null): Promise<Http.ResponsesI> {
         const { token = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/refresh`
-        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
+        const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
@@ -132,7 +132,7 @@ export class AuthUser extends ClientBase {
     async verify(options: any = {}, headers: any = null): Promise<Http.ResponsesI> {
         const { token = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/verify`
-        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
+        const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.getRefreshToken()}`,
@@ -150,7 +150,7 @@ export class AuthUser extends ClientBase {
     async activate(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { token = '', otp = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/activate`
-        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
+        const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
                 ...(headers ? headers : {})
@@ -163,7 +163,7 @@ export class AuthUser extends ClientBase {
     async activateResend(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/activate/resend`
-        const response = this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
+        const response = await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
                 ...(headers ? headers : {})
