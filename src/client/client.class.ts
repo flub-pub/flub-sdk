@@ -14,12 +14,14 @@ export class Client {
     public UtilUrls: any
     public accessToken: string
     public refreshToken: string
+    public clientId: string
+    public clientSecret: string
     public storageName: string
     public oauthTokens: any
     public AuthUser: any
     public OrgUser: any
-    public ApiKey: any
     public ScopeApp: any
+    public ApiKey: any
 
     constructor(config: Config.InitI) {
 
@@ -35,12 +37,14 @@ export class Client {
         // Instantiate chained classes
         this.AuthUser = new AuthUser(this, '/auth/user')
         this.OrgUser = new OrgUser(this, '/org/user')
-        this.ApiKey = new ApiKey(this, '/api/key')
         this.ScopeApp = new ScopeApp(this, '/scope/app')
+        this.ApiKey = new ApiKey(this, '/api/key')
 
         // Initialize states
         this.accessToken = this.Config.accessToken || this.AuthUser.getAccessToken() || ''
         this.refreshToken = this.Config.refreshToken || this.AuthUser.getRefreshToken() || ''
+        this.clientId = this.Config.clientId || this.ScopeApp.getClientId() || ''
+        this.clientSecret = this.Config.clientSecret || this.ScopeApp.getClientSecret() || ''
         this.storageName = this.Config.storageName || 'FlubStore'
         this.oauthTokens = {}
     }

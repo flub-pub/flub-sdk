@@ -22,30 +22,6 @@ export class AuthUser extends ClientBase {
         }))
     }
 
-    async update(options: any, headers: any = null): Promise<Http.ResponsesI> {
-        const { email = '', username = '', id = '', updates = {} } = options
-        const bodyObj = { email: email, username: username, id: id, updates: updates }
-        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
-        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.putAsync(queryUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.getAccessToken()}`,
-                ...(headers ? headers : {})
-            },
-            body: JSON.stringify(bodyObj)
-        }))
-    }
-
-    async getAll(headers: any = null): Promise<Http.ResponsesI> {
-        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/list`
-        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
-            headers: {
-                'Authorization': `Bearer ${this.getAccessToken()}`,
-                ...(headers ? headers : {})
-            }
-        }))
-    }
-
     async get(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
@@ -63,6 +39,20 @@ export class AuthUser extends ClientBase {
         }))
     }
 
+    async update(options: any, headers: any = null): Promise<Http.ResponsesI> {
+        const { email = '', username = '', id = '', updates = {} } = options
+        const bodyObj = { email: email, username: username, id: id, updates: updates }
+        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
+        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.putAsync(queryUrl, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getAccessToken()}`,
+                ...(headers ? headers : {})
+            },
+            body: JSON.stringify(bodyObj)
+        }))
+    }
+
     async delete(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
@@ -73,6 +63,16 @@ export class AuthUser extends ClientBase {
                 ...(headers ? headers : {})
             },
             body: JSON.stringify({ email, username, id })
+        }))
+    }
+
+    async getList(headers: any = null): Promise<Http.ResponsesI> {
+        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/list`
+        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
+            headers: {
+                'Authorization': `Bearer ${this.getAccessToken()}`,
+                ...(headers ? headers : {})
+            }
         }))
     }
 

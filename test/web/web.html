@@ -20,7 +20,9 @@ Open your console to see the results from FlubSDK!
         // Start a new client
         const FlubClient = new FlubSDK.Client({
             baseUrl: 'http://127.0.0.1:8787',
-            accessToken: adminToken
+            accessToken: adminToken,
+            clientId: 'some-client-id',
+            clientSecret: 'some-client-secret'
         })
         // console.log('FlubClient initialized with admin accessToken.')
         // console.log(FlubClient)

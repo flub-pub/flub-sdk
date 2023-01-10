@@ -49,4 +49,38 @@ export class ClientBase {
             return null
         }
     }
+
+    getClientId(): string {
+        if (this.ctx.UtilMisc.isBrowser()) {
+            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName)
+            return storageObj ? storageObj.clientId : this.ctx.clientId
+        } else {
+            return this.ctx.clientId
+        }
+    }
+
+    setClientId(clientId: string) {
+        this.ctx.clientId = clientId
+        if (this.ctx.UtilMisc.isBrowser()) {
+            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName) || {}
+            this.ctx.UtilMisc.setLocalStore(this.ctx.storageName, { ...storageObj, clientId: clientId })
+        }
+    }
+
+    getClientSecret(): string {
+        if (this.ctx.UtilMisc.isBrowser()) {
+            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName)
+            return storageObj ? storageObj.clientSecret : this.ctx.clientSecret
+        } else {
+            return this.ctx.clientSecret
+        }
+    }
+
+    setClientSecret(clientSecret: string) {
+        this.ctx.clientId = clientSecret
+        if (this.ctx.UtilMisc.isBrowser()) {
+            const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName) || {}
+            this.ctx.UtilMisc.setLocalStore(this.ctx.storageName, { ...storageObj, clientSecret: clientSecret })
+        }
+    }
 }
