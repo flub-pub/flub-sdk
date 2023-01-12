@@ -16,6 +16,7 @@ export class ScopeApp extends ClientBase {
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getAccessToken()}`,
                 ...(headers ? headers : {})
             },
             body: JSON.stringify(bodyObj)
