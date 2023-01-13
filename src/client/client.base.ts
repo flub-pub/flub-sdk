@@ -42,14 +42,6 @@ export class ClientBase {
         }
     }
 
-    getOauthToken(provider: string): any {
-        if (provider in this.ctx.oauthTokens) {
-            return this.ctx.oauthTokens[provider]
-        } else {
-            return null
-        }
-    }
-
     getClientId(): string {
         if (this.ctx.UtilMisc.isBrowser()) {
             const storageObj = this.ctx.UtilMisc.getLocalStore(this.ctx.storageName)

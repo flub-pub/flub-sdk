@@ -235,13 +235,6 @@ export class AuthUser extends ClientBase {
             },
             body: JSON.stringify({ redirectUrl })
         }))
-        if (response.status === 200) {
-            for (const provider in response.data) {
-                this.ctx.oauthTokens[provider] = {
-                    token: response.data[provider].token
-                }
-            }
-        }
         return response
     }
 

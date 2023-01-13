@@ -17,7 +17,6 @@ export class Client {
     public clientId: string
     public clientSecret: string
     public storageName: string
-    public oauthTokens: any
     public AuthUser: any
     public OrgUser: any
     public ScopeApp: any
@@ -46,6 +45,5 @@ export class Client {
         this.clientId = this.Config.clientId || this.ScopeApp.getClientId() || ''
         this.clientSecret = this.Config.clientSecret || this.ScopeApp.getClientSecret() || ''
         this.storageName = this.Config.storageName || 'FlubStore'
-        this.oauthTokens = {}
     }
 }
