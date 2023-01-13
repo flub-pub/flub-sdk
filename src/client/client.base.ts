@@ -1,12 +1,9 @@
 export class ClientBase {
     public ctx: any
-    public base_prefix: string
 
-    constructor(context: any, base_prefix: string) {
+    constructor(context: any) {
         this.ctx = context
-        this.base_prefix = base_prefix
     }
-
 
     getAccessToken(): string {
         if (this.ctx.UtilMisc.isBrowser()) {

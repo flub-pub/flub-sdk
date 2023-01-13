@@ -1,6 +1,7 @@
 import { Config } from '../config'
 import { Http } from '../http'
 import { Util } from '../util'
+import { ClientBase } from './client.base'
 import { AuthUser } from './client.authuser'
 import { OrgUser } from './client.orguser'
 import { ApiKey } from './client.apikey'
@@ -12,11 +13,12 @@ export class Client {
     public HttpResponses: any
     public UtilMisc: any
     public UtilUrls: any
+    public storageName: string
     public accessToken: string
     public refreshToken: string
     public clientId: string
     public clientSecret: string
-    public storageName: string
+    public Base: any
     public AuthUser: any
     public OrgUser: any
     public ScopeApp: any
@@ -34,16 +36,17 @@ export class Client {
         this.UtilUrls = new Util.Urls()
 
         // Instantiate chained classes
+        this.Base = new ClientBase(this)
         this.AuthUser = new AuthUser(this, '/auth/user')
         this.OrgUser = new OrgUser(this, '/org/user')
         this.ScopeApp = new ScopeApp(this, '/scope/app')
         this.ApiKey = new ApiKey(this, '/api/key')
 
         // Initialize states
-        this.accessToken = this.Config.accessToken || this.AuthUser.getAccessToken() || ''
-        this.refreshToken = this.Config.refreshToken || this.AuthUser.getRefreshToken() || ''
-        this.clientId = this.Config.clientId || this.ScopeApp.getClientId() || ''
-        this.clientSecret = this.Config.clientSecret || this.ScopeApp.getClientSecret() || ''
         this.storageName = this.Config.storageName || 'FlubStore'
+        this.accessToken = this.Config.accessToken || this.Base.getAccessToken() || ''
+        this.refreshToken = this.Config.refreshToken || this.Base.getRefreshToken() || ''
+        this.clientId = this.Config.clientId || this.Base.getClientId() || ''
+        this.clientSecret = this.Config.clientSecret || this.Base.getClientSecret() || ''
     }
 }
