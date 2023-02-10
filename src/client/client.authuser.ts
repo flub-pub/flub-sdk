@@ -213,7 +213,7 @@ export class AuthUser extends ClientBase {
         }
     }
 
-    async toggle2fa(options: any, headers: any = null): Promise<Http.ResponsesI> {
+    async toggleTfa(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
