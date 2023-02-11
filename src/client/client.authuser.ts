@@ -214,7 +214,7 @@ export class AuthUser extends ClientBase {
     }
 
     async toggleTfa(options: any, headers: any = null): Promise<Http.ResponsesI> {
-        const { email = '', username = '', id = '' } = options
+        const { email = '', username = '', id = '', password = '' } = options
         const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
@@ -222,7 +222,7 @@ export class AuthUser extends ClientBase {
                 'Authorization': `Bearer ${this.getAccessToken()}`,
                 ...(headers ? headers : {})
             },
-            body: JSON.stringify({ email, username, id })
+            body: JSON.stringify({ email, username, id, password })
         }))
     }
 
