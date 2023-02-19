@@ -27,9 +27,9 @@ export class AuthUser extends ClientBase {
         const { email = '', username = '', id = '' } = options
         const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}`
         const queryUrl = this.ctx.UtilUrls.addQueryToUrl(baseUrl, [
-            `email=${email}`,
-            `username=${username}`,
-            `id=${id}`
+            ...(email ? [`email=${email}`] : []),
+            ...(username ? [`username=${username}`] : []),
+            ...(id ? [`id=${id}`] : []),
         ])
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
             headers: {
@@ -191,9 +191,9 @@ export class AuthUser extends ClientBase {
         if (!password) {
             const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/reset`
             const queryUrl = this.ctx.UtilUrls.addQueryToUrl(baseUrl, [
-                `token=${token}`,
+                ...(token ? [`token=${token}`] : []),
                 `source=client`,
-                `redirectUrl=${redirectUrl}`
+                ...(redirectUrl ? [`redirectUrl=${redirectUrl}`] : [])
             ])
             return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
                 headers: {
@@ -227,12 +227,13 @@ export class AuthUser extends ClientBase {
     }
 
     async tfaGetQr(options: any, headers: any = null): Promise<Http.ResponsesI> {
-        const { email = '', username = '', id = '' } = options
+        const { email = '', username = '', id = '', regenerate = false } = options
         const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa/qr`
         const queryUrl = this.ctx.UtilUrls.addQueryToUrl(baseUrl, [
-            `email=${email}`,
-            `username=${username}`,
-            `id=${id}`
+            ...(email ? [`email=${email}`] : []),
+            ...(username ? [`username=${username}`] : []),
+            ...(id ? [`id=${id}`] : []),
+            ...(regenerate ? [`regenerate=${regenerate}`] : [])
         ])
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
             headers: {
