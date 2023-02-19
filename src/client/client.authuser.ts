@@ -228,7 +228,7 @@ export class AuthUser extends ClientBase {
 
     async tfaGetQr(options: any, headers: any = null): Promise<Http.ResponsesI> {
         const { email = '', username = '', id = '' } = options
-        const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa/toggle/qr`
+        const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa/qr`
         const queryUrl = this.ctx.UtilUrls.addQueryToUrl(baseUrl, [
             `email=${email}`,
             `username=${username}`,
