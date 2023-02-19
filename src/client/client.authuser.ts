@@ -213,16 +213,46 @@ export class AuthUser extends ClientBase {
         }
     }
 
-    async toggleTfa(options: any, headers: any = null): Promise<Http.ResponsesI> {
-        const { email = '', username = '', id = '', password = '' } = options
-        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa`
+    async tfaToggle(options: any, headers: any = null): Promise<Http.ResponsesI> {
+        const { email = '', username = '', id = '', password = '', enable = false } = options
+        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa/toggle`
         return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.getAccessToken()}`,
                 ...(headers ? headers : {})
             },
-            body: JSON.stringify({ email, username, id, password })
+            body: JSON.stringify({ email, username, id, password, enable })
+        }))
+    }
+
+    async tfaGetQr(options: any, headers: any = null): Promise<Http.ResponsesI> {
+        const { email = '', username = '', id = '' } = options
+        const baseUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa/toggle/qr`
+        const queryUrl = this.ctx.UtilUrls.addQueryToUrl(baseUrl, [
+            `email=${email}`,
+            `username=${username}`,
+            `id=${id}`
+        ])
+        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.getAsync(queryUrl, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getAccessToken()}`,
+                ...(headers ? headers : {})
+            },
+        }))
+    }
+
+    async tfaVerify(options: any, headers: any = null): Promise<Http.ResponsesI> {
+        const { email = '', username = '', id = '', otp = '' } = options
+        const queryUrl = `${this.ctx.Config.baseUrl}${this.base_prefix}/tfa/verify`
+        return await this.ctx.HttpResponses.resolveResponse(this.ctx.HttpServices.postAsync(queryUrl, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getAccessToken()}`,
+                ...(headers ? headers : {})
+            },
+            body: JSON.stringify({ email, username, id, otp })
         }))
     }
 
